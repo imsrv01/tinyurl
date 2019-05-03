@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="jumbotron text-center"> 
+        <h1>Welcome to tiny URL</h1>
+    </div>
+  {% if short_url %}
+       <div>
+                  Enjoy, your shortened URL is: <a href="{{short_url}}"> {{short_url}}</a>
+        </div>
+  {% endif %}
+  <form method="post" class="navbar-form navbar-right" action="">
+      <div class="input-group mb-3">
+      <input type="text" id="url" name="url" class="form-control" placeholder="Long URL" aria-label="Recipient's username" aria-describedby="button-addon2">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Get URL</button>
+      </div>
+  </form>
+  
+</div>
+
+{% endblock %}
