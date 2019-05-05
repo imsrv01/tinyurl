@@ -1,8 +1,9 @@
 #!flask/bin/python
 import json, random, string
-from flask import Flask, Response, render_template, request, redirect
+from flask import Flask, Response, render_template, request, redirect, send_from_directory
 import boto3
 from botocore.exceptions import ClientError
+import os
 #from helloworld.flaskrun import flaskrun
 
 application = Flask(__name__)
@@ -14,6 +15,7 @@ def url():
         longurl = request.form.get('url')
         print("longurl --> " + longurl)
         short_url = randomString()
+        print("short_url --> " + short_url)
         dynamodb =boto3.resource('dynamodb')
         table = dynamodb.Table('tiny_url')
         table.put_item(
@@ -28,6 +30,7 @@ def url():
 @application.route('/<short_url>')
 def redirect_short_url(short_url):
     try:
+        print("finding long url for - " + short_url)
         dynamodb =boto3.resource('dynamodb')
         table = dynamodb.Table('tiny_url')
         response = table.get_item(
@@ -37,13 +40,16 @@ def redirect_short_url(short_url):
         )
     except ClientError as e:
         print(e.response['Error']['Message'])
-        
     else:
         longurl = response['Item']['longurl']
-        #print("GetItem succeeded:" + longurl)
+        print("GetItem succeeded:" + json.dumps(response['Item']))
         print("redirecting to  --> " + longurl)
         return redirect(longurl)
 
+@application.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(application.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 def randomString(stringLength=10):
     """Generate a random string of fixed length """
     letters = string.ascii_lowercase
@@ -80,7 +86,7 @@ def createTable():
         'WriteCapacityUnits': 10
     }
     )
-    
+
 
 
 if __name__ == '__main__':
@@ -90,5 +96,5 @@ if __name__ == '__main__':
     application.run(
         debug="false",
         host="127.0.0.1",
-        port=8080
+        port=5000
     )

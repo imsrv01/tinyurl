@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <div class="jumbotron text-center"> 
+    <div class="jumbotron text-center">
         <h1>Welcome to tiny URL</h1>
     </div>
   {% if short_url %}
+
        <div>
-                  Enjoy, your shortened URL is: <a href="{{short_url}}"> {{short_url}}</a>
+                  Enjoy, your shortened URL is: <a href="{{short_url}}" target="_blank"> {{short_url}}</a>
         </div>
+
   {% endif %}
   <form method="post" class="navbar-form navbar-right" action="">
       <div class="input-group mb-3">
@@ -16,7 +18,7 @@
         <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Get URL</button>
       </div>
   </form>
-  
+
 </div>
 
 {% endblock %}
