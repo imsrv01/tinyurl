@@ -95,6 +95,6 @@ if __name__ == '__main__':
     #createTable()
     application.run(
         debug="false",
-        host="127.0.0.1",
+        host="0.0.0.0",
         port=5000
     )
