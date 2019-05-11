@@ -16,7 +16,7 @@ def url():
         print("longurl --> " + longurl)
         short_url = randomString()
         print("short_url --> " + short_url)
-        dynamodb =boto3.resource('dynamodb')
+        dynamodb =boto3.resource('dynamodb',region_name='us-west-2')
         table = dynamodb.Table('tiny_url')
         table.put_item(
         Item={
@@ -31,7 +31,7 @@ def url():
 def redirect_short_url(short_url):
     try:
         print("finding long url for - " + short_url)
-        dynamodb =boto3.resource('dynamodb')
+        dynamodb =boto3.resource('dynamodb',region_name='us-west-2')
         table = dynamodb.Table('tiny_url')
         response = table.get_item(
         Key={
@@ -57,7 +57,7 @@ def randomString(stringLength=10):
 
 def createTable():
 
-    dynamodb = boto3.resource('dynamodb')
+    dynamodb = boto3.resource('dynamodb',region_name='us-west-2')
     table = dynamodb.create_table(
     TableName='tinyurl',
     KeySchema=[
