@@ -5,12 +5,12 @@
             "image": "%REPOSITORY_URI%:%BUILD_NUMBER%",
             "name": "tinyurl",
             "cpu": 10,
-            "memory": 512,
+            "memory": 256,
             "essential": true,
             "portMappings": [
                 {
                     "containerPort": 5000,
-                    "hostPort": 8081
+                    "hostPort": 80
                 }
             ]
         }
