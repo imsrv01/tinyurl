@@ -2,7 +2,7 @@
     "family": "tinyurl",
     "containerDefinitions": [
         {
-            "image": "%REPOSITORY_URI%:v_%BUILD_NUMBER%",
+            "image": "%REPOSITORY_URI%:%BUILD_NUMBER%",
             "name": "tinyurl",
             "cpu": 10,
             "memory": 256,
