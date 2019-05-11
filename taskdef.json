@@ -5,7 +5,7 @@
             "image": "%REPOSITORY_URI%:%BUILD_NUMBER%",
             "name": "tinyurl",
             "cpu": 10,
-            "memory": 2048,
+            "memory": 512,
             "essential": true,
             "portMappings": [
                 {
